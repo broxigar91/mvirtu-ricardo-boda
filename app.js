@@ -26,7 +26,7 @@ angular.module('bodaApp', [])
           direccion: "Paraje Casas de Cabanes y las Fuentes, 127",
           ciudad: "Villena",
           coords: { lat: 38.6550289, lng: -0.8842534 },
-          web: "https://alojamientoeskapa.my.canva.site/",
+          web: "https://alojamientoeskapa.com/",
           parking: "Al aire libre, al lado del recinto.",
           tipo : "banquete"
         }
