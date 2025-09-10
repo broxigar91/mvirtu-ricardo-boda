@@ -1,228 +1,236 @@
 <!DOCTYPE html>
-<html lang="es" ng-app="bodaApp">
+<html lang="es" ng-app="weddingApp">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>¡Nos casamos! — Mari Virtu & Ricardo</title>
-  <meta name="description" content="Landing de boda: fecha, lugar, confirmación de asistencia, itinerario y más." />
-  <meta property="og:title" content="¡Nos casamos! — Mari Virtu & Ricardo" />
-  <meta property="og:description" content="Acompáñanos en nuestro gran día. Aquí encontrarás toda la info y podrás confirmar tu asistencia." />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#ffffff" />
-
-  <!-- Tailwind CSS (CDN) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- AngularJS 1.x (CDN) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival del Amor de [Nombre del novio] y [Nombre de la novia]</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="script.js"></script>
 </head>
-<body class="text-gray-800 antialiased" ng-controller="MainCtrl as vm">
-  <!-- Navbar -->
-  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-100">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="#inicio" class="font-serif text-xl">MV ❤ R</a>
-      <nav class="hidden md:flex gap-6 text-sm">
-        <a href="#inicio" class="hover:text-pink-600">Inicio</a>
-        <a href="#nuestra-historia" class="hover:text-pink-600">Historia</a>
-        <a href="#cuenta-regresiva" class="hover:text-pink-600">Cuenta atrás</a>
-        <a href="#itinerario" class="hover:text-pink-600">Itinerario</a>
-        <a href="#ubicacion" class="hover:text-pink-600">Ubicación</a>
-        <a href="#galeria" class="hover:text-pink-600">Galería</a>
-        <a href="#rsvp" class="hover:text-pink-600 font-semibold">Confirmar</a>
-        <a href="#faq" class="hover:text-pink-600">FAQ</a>
-      </nav>
-      <a href="#rsvp" class="md:hidden inline-flex items-center px-3 py-1.5 rounded-xl bg-pink-600 text-white text-sm shadow">Confirmar</a>
-    </div>
-  </header>
+<body>
 
-  <!-- Hero -->
-  <section id="inicio" class="hero-bg">
-    <div class="max-w-6xl mx-auto px-4 py-20 md:py-28 grid md:grid-cols-2 items-center gap-10">
-      <div class="fade-in">
-        <p class="uppercase tracking-widest text-xs text-gray-700/80">¡Nos casamos!</p>
-        <h1 class="mt-3 font-serif text-4xl md:text-6xl leading-tight">{{vm.data.novios}}</h1>
-        <p class="mt-4 text-lg md:text-xl">Te esperamos el <strong>{{vm.fechaLarga}}</strong> en <strong>{{vm.getLugarPorTipo('ceremonia').nombre}} - {{vm.getLugarPorTipo('ceremonia').ciudad}}</strong>.</p>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a href="#rsvp" class="px-5 py-3 rounded-2xl bg-pink-600 text-white shadow hover:shadow-md">Confirmar asistencia</a>
-          <a href="#itinerario" class="px-5 py-3 rounded-2xl border border-gray-300 hover:border-gray-400">Ver itinerario</a>
-        </div>
-      </div>
-      <div class="relative">
-        <div class="rounded-3xl bg-white/70 p-6 shadow-lg">
-          <div class="grid grid-cols-3 text-center gap-4" id="cuenta-regresiva">
-            <div class="p-4 rounded-2xl bg-white shadow">
-              <div class="text-4xl font-bold">{{vm.countdown.days}}</div>
-              <div class="text-xs tracking-wide">DÍAS</div>
+    <div ng-controller="WeddingController as wedding">
+        <nav class="floating-menu" id="floatingMenu">
+            <button class="menu-toggle" aria-expanded="false" aria-controls="menuLinks" title="Abrir menú">☰</button>
+            <div class="menu-links" id="menuLinks">
+                <a href="#lineup">Line-up</a>
+                <a href="#ceremonia">Ceremonia</a>
+                <a href="#banquete">Banquete</a>
+                <a href="#itinerario">Itinerario</a>
+                <a href="#galeria">Galería</a>
+                <a href="#rsvp">Asistencia</a>
+                <a href="#info-puntos">Info</a>
             </div>
-            <div class="p-4 rounded-2xl bg-white shadow">
-              <div class="text-4xl font-bold">{{vm.countdown.hours}}</div>
-              <div class="text-xs tracking-wide">HORAS</div>
+        </nav>
+        <header class="hero">
+            <div class="hero-content">
+                <h1>¡El festival del amor está aquí!</h1>
+                <p class="subtitle">Presentando a:</p>
+                <h2>{{ wedding.groomName }} & {{ wedding.brideName }}</h2>
+                <div class="event-info">
+                    <span class="event-date">{{ wedding.ceremonyDate }} - {{ wedding.ceremonyTime }}</span>
+                    <span class="event-location">{{ wedding.ceremonyPlace }} - {{wedding.ceremonyAddress}}</span>
+                </div>
+                <div class="countdown">
+                    <span>{{ wedding.countdown.days }} días</span>
+                    <span>{{ wedding.countdown.hours }} horas</span>
+                    <span>{{ wedding.countdown.minutes }} min</span>
+                    <span>{{ wedding.countdown.seconds }} seg</span>
+                </div>
+                <a href="#info" class="cta-button" ng-click="wedding.scrollToLineUp(); $event.preventDefault();">Ver el Line-Up</a>
             </div>
-            <div class="p-4 rounded-2xl bg-white shadow">
-              <div class="text-4xl font-bold">{{vm.countdown.minutes}}</div>
-              <div class="text-xs tracking-wide">MINUTOS</div>
-            </div>
-          </div>
-          <p class="mt-4 text-center text-sm text-gray-600">Faltan para el gran día</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        </header>
 
-  <!-- Nuestra historia -->
-  <section id="nuestra-historia" class="py-16 md:py-24 bg-white">
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="font-serif text-3xl md:text-4xl text-center">Nuestra historia</h2>
-      <p class="mt-6 text-lg text-gray-700 leading-relaxed text-center">{{vm.data.historia}}</p>
-    </div>
-  </section>
+        <main id="info" class="container">
 
-  <!-- Itinerario -->
-  <section id="itinerario" class="py-16 md:py-24 bg-gray-50">
-    <div class="max-w-5xl mx-auto px-4">
-      <h2 class="font-serif text-3xl md:text-4xl text-center">Itinerario</h2>
-      <div class="mt-10 grid md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-3xl bg-white shadow" ng-repeat="item in vm.data.itinerario">
-          <div class="text-sm text-gray-500">{{item.hora}}</div>
-          <div class="mt-1 font-semibold">{{item.titulo}}</div>
-          <p class="mt-2 text-sm text-gray-600">{{item.descripcion}}</p>
-        </div>
-      </div>
-    </div>
-  </section>
+            <section class="section line-up" id="lineup">
+                <h3>🎵 Line-up del festival</h3>
+                <div class="headline-cards">
+                    <div class="card headliner" style="background-image: url('assets/images/mvirtu.jpg');">
+                        <h4>Cabeza de cartel</h4>
+                        <p class="headliner-name">{{ wedding.brideName }}</p>
+                    </div>
+                    <div class="card headliner" style="background-image: url('assets/images/2_final.png');">
+                        <h4>Cabeza de cartel</h4>
+                        <p class="headliner-name">{{ wedding.groomName }}</p>
+                    </div>
+                </div>
+                <p class="description">{{ wedding.descriptionText }}</p>
+            </section>
 
-  <!-- Ubicación -->
-  <section id="ubicacion" class="py-16 md:py-24 bg-white">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-serif text-3xl md:text-4xl text-center">Ubicación</h2>
-      <div class="mt-8 grid md:grid-cols-2 gap-8 items-start">
-        <div ng-repeat="lugar in vm.data.lugares" class="bg-white rounded-3xl p-6 text-center">
-          <h3 class="text-xl font-semibold">{{lugar.nombre}}</h3>
-          <p class="mt-2 text-gray-700">{{lugar.direccion}}</p>
-          <p class="text-gray-700">{{lugar.ciudad}}</p>
-          <div class="mt-4 flex gap-3 justify-center">
-            <a ng-href="https://www.google.com/maps/dir/?api=1&destination={{lugar.coords.lat}},{{lugar.coords.lng}}" target="_blank" class="px-4 py-2 rounded-xl border">Cómo llegar</a>
-            <a ng-if="lugar.web" ng-href="{{lugar.web}}" target="_blank" class="px-4 py-2 rounded-xl border">Sitio web</a>
-          </div>
-          <span class="mt-4 inline-block text-sm text-gray-500 font-bold">{{lugar.tipo | uppercase}}</span>
-          <ul class="mt-6 text-sm text-gray-700 list-disc list-inside space-y-1">
-            <li ng-if="lugar.parking"><strong>Aparcamiento:</strong> {{lugar.parking}}</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+            <!-- Sección historia del festival -->
+            <section class="section festival-history" id="historia">
+                <h3>📖 Historia del Festival</h3>
+                <p>
+                    {{wedding.story}}
+                </p>
+            </section>
 
-  <!-- Galería -->
-  <section id="galeria" class="py-16 md:py-24 bg-gray-50">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-serif text-3xl md:text-4xl text-center">Galería</h2>
-      <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-        <img ng-repeat="foto in vm.data.galeria" ng-src="{{foto.src}}" alt="Foto {{ $index + 1 }}" class="rounded-2xl w-full h-40 object-cover shadow"/>
-      </div>
-    </div>
-  </section>
+            <section class="section" id="ceremonia">
+                <h3>🗓️ El Escenario Principal: La Ceremonia</h3>
+                <p><strong>Hora:</strong> {{ wedding.ceremonyTime }}</p>
+                <p><strong>Lugar:</strong> {{ wedding.ceremonyPlace }}</p>
+                <button class="cta-button" ng-click="wedding.openLink(wedding.ceremonyHowToGo)">Cómo llegar</button>
+            </section>
 
-  <!-- Confirmación (RSVP) -->
-  <section id="rsvp" class="py-16 md:py-24 bg-white">
-    <div class="max-w-3xl mx-auto px-4">
-      <h2 class="font-serif text-3xl md:text-4xl text-center">Confirma tu asistencia</h2>
-      <div class="relative">
-        <form name="rsvpForm" novalidate ng-submit="vm.enviarRSVP(rsvpForm)" class="mt-8 space-y-5 bg-gray-50 p-6 md:p-8 rounded-3xl shadow">
-          <div class="grid md:grid-cols-2 gap-5">
-            <div>
-              <label class="text-sm">Nombre y apellidos</label>
-              <input type="text" class="mt-1 w-full rounded-xl border px-3 py-2" ng-model="vm.rsvp.nombre" required />
-            </div>
-            <div>
-              <label class="text-sm">Correo electrónico</label>
-              <input type="email" class="mt-1 w-full rounded-xl border px-3 py-2" ng-model="vm.rsvp.email" required />
-            </div>
-          </div>
-          <div class="grid md:grid-cols-2 gap-5">
-            <div>
-              <label class="text-sm">¿Asistirás?</label>
-              <select class="mt-1 w-full rounded-xl border px-3 py-2" ng-model="vm.rsvp.asistencia" required>
-                <option value="" disabled selected hidden>Selecciona una opción</option>
-                <option value="si">Sí, allí estaré</option>
-                <option value="no">No podré asistir</option>
-              </select>
-            </div>
-            <div>
-              <label class="text-sm">Menú</label>
-              <select class="mt-1 w-full rounded-xl border px-3 py-2" ng-model="vm.rsvp.menu" required>
-                <option value="" disabled selected hidden>Selecciona una opción</option>
-                <option value="carne">Carne</option>
-                <option value="pescado">Pescado</option>
-                <option value="vegetariano">Vegetariano/Vegano</option>
-              </select>
-            </div>
-            <div>
-              <label class="text-sm">Alergias o restricciones</label>
-              <input type="text" class="mt-1 w-full rounded-xl border px-3 py-2" placeholder="Opcional" ng-model="vm.rsvp.alergias" />
-            </div>
-          </div>
-          <div>
-            <label class="text-sm">Mensaje para los novios</label>
-            <textarea class="mt-1 w-full rounded-xl border px-3 py-2" rows="3" placeholder="Opcional" ng-model="vm.rsvp.mensaje"></textarea>
-          </div>
-          <div class="flex items-center gap-3">
-            <button type="submit" class="px-5 py-3 rounded-2xl bg-pink-600 text-white shadow hover:shadow-md">Enviar confirmación</button>
-          </div>
-          <p class="text-green-700 text-sm" ng-if="vm.enviado && vm.rsvp.asistencia==='si'">¡Gracias! Hemos guardado tu respuesta. 📩</p>
-          <p class="text-gray-700 text-sm" ng-if="vm.enviado && vm.rsvp.asistencia==='no'">Gracias por avisar. Te mandamos un abrazo. 🤍</p>
-        </form>
-        <!-- Overlay de éxito -->
-        <div ng-if="vm.enviado" class="absolute inset-0 flex items-center justify-center bg-white/90 z-10 rounded-2xl">
-          <div class="text-green-700 text-xl font-semibold text-center px-6 py-8">
-            ¡Gracias! Tu mensaje ha sido enviado correctamente.
-          </div>
-        </div>
-        <!-- Loader overlay (z-20 para estar encima del overlay de éxito si coinciden) -->
-        <div ng-if="vm.enviando" class="absolute inset-0 flex items-center justify-center bg-white/80 z-20 rounded-2xl">
-          <div class="flex flex-col items-center">
-            <svg class="animate-spin h-10 w-10 text-pink-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-            </svg>
-            <span class="text-pink-700 font-semibold">Enviando...</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+            <section class="section" id="banquete">
+                <h3>🎉 La Zona VIP: El Banquete</h3>
+                <p><strong>Hora de inicio:</strong> {{ wedding.partyTime }}</p>
+                <p><strong>Lugar:</strong> {{ wedding.partyPlace }}</p>
+                <p><strong>Aparcamiento:</strong> En las inmediaciones del recinto, al aire libre</p>
+                <button class="cta-button" ng-click="wedding.openLink(wedding.partyHowToGo)">Cómo llegar</button>
+                <button class="cta-button" ng-click="wedding.openLink(wedding.partyPlaceWebsite)">Web del lugar</button>
+                
+            </section>
 
-  <!-- FAQ -->
-  <section id="faq" class="py-16 md:py-24 bg-white">
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="font-serif text-3xl md:text-4xl text-center">Preguntas frecuentes</h2>
-      <div class="mt-8 divide-y">
-        <details class="py-4">
-          <summary class="cursor-pointer font-medium">¿Puedo llevar acompañante?</summary>
-          <p class="mt-2 text-gray-700">Indícalo en tu confirmación y te diremos disponibilidad.</p>
-        </details>
-        <details class="py-4">
-          <summary class="cursor-pointer font-medium">¿Niños?</summary>
-          <p class="mt-2 text-gray-700">¡Claro! Habrá zona infantil y animación.</p>
-        </details>
-        <details class="py-4">
-          <summary class="cursor-pointer font-medium">¿Hay opciones vegetarianas/veganas?</summary>
-          <p class="mt-2 text-gray-700">Sí, por favor coméntalo en el formulario.</p>
-        </details>
-      </div>
-    </div>
-  </section>
+            <!-- Sección itinerario tipo parrilla de festival -->
+            <section class="section festival-schedule" id="itinerario">
+                <h3>🕒 Itinerario del Festival</h3>
+                <div class="festival-grid">
+                    <div class="festival-row">
+                        <span class="festival-time">12:00</span>
+                        <span class="festival-act">Ceremonia - Escenario Principal</span>
+                    </div>
+                    <div class="festival-row">
+                        <span class="festival-time">13:30</span>
+                        <span class="festival-act">Banquete - Zona VIP</span>
+                    </div>
+                    <div class="festival-row">
+                        <span class="festival-time">15:00</span>
+                        <span class="festival-act">DJ Invitado - Chill Out Stage</span>
+                    </div>
+                    <div class="festival-row">
+                        <span class="festival-time">17:00</span>
+                        <span class="festival-act">Photocall &amp; Juegos - Fun Zone</span>
+                    </div>
+                    <div class="festival-row">
+                        <span class="festival-time">19:00</span>
+                        <span class="festival-act">Fiesta y Baile - Main Stage</span>
+                    </div>
+                </div>
+            </section>
 
-  <!-- Footer -->
-  <footer class="py-10 border-t">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-      <p class="text-sm">© {{vm.year}} Mari Virtu & Ricardo — Con ❤️</p>
-    </div>
-  </footer>
+            <section class="section" id="galeria">
+                <h3>📸 Galeria</h3>
+                <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <img ng-repeat="foto in wedding.galeria" ng-src="{{foto.src}}" alt="Foto {{ $index + 1 }}" class="rounded-2xl w-full h-40 object-cover shadow"/>
+                </div>
+                <a href="https://photos.app.goo.gl/tu-album-aqui" class="cta-button" target="_blank" rel="noopener">Comparte con nosotros las fotos del evento</a>
+            </section>
 
-  <!-- Custom JS -->
-  <script src="app.js"></script>
+            <section class="section" id="rsvp">
+                <h3>💌 Confirma tu asistencia</h3>
+                <p>¡No podemos esperar a verte! Por favor, confirma tu asistencia antes del {{ wedding.rsvpDeadline }} para que podamos organizarlo todo.</p>
+                <form ng-submit="wedding.submitRSVP()">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="rsvp-name">Nombre y apellidos</label>
+                            <input id="rsvp-name" type="text" ng-model="wedding.rsvp.nombre" placeholder="Tu nombre y apellidos" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rsvp-email">Email</label>
+                            <input id="rsvp-email" type="email" ng-model="wedding.rsvp.email" placeholder="Tu email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="attendance-select">Asistencia</label>
+                            <select id="attendance-select" ng-model="wedding.rsvp.asistencia" required>
+                                <option value="" disabled hidden selected>Selecciona una opción</option>
+                                <option value="asistire">Asistiré</option>
+                                <option value="no-asistire">No podré asistir</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="rsvp-alergias">Alergias/Intolerancias</label>
+                            <input id="rsvp-alergias" type="text" ng-model="wedding.rsvp.alergias" placeholder="Alergias/Intolerancias" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="rsvp-message">Mensaje para los novios</label>
+                            <textarea id="rsvp-message" ng-model="wedding.rsvp.mensaje" placeholder="Escribe tu mensaje" required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="cta-button" ng-disabled="wedding.enviando">{{ wedding.enviando ? 'Enviando...' : 'Enviar confirmación' }}</button>
+                    <p ng-show="wedding.message" class="{{ wedding.messageClass }}" id="form-message">{{ wedding.message }}</p>
+                </form>
+                <p ng-show="wedding.message" class="{{ wedding.messageClass }}">{{ wedding.message }}</p>
+            </section>
+
+            <section class="section" id="info-puntos">
+                <h3>🎁 Puntos de información</h3>
+                <!-- <p><strong>Código de vestimenta:</strong> {{ wedding.dressCode }}</p> -->
+                <p><strong>Regalos:</strong> Tu presencia es nuestro mejor regalo.
+            </section>
+
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Festival del Amor. Creado con mucho cariño por {{ wedding.groomName }} & {{ wedding.brideName }}.</p>
+        </footer>
+    </div>
+</main>
+<script>
+(function() {
+    var nav = document.getElementById('floatingMenu');
+    if (!nav) return;
+    var btn = nav.querySelector('.menu-toggle');
+    var links = nav.querySelector('.menu-links');
+    // Estado inicial según ancho de pantalla
+    function isDesktop() { return window.matchMedia('(min-width: 768px)').matches; }
+    function setState(open) {
+        if (!nav) return;
+        if (open) { nav.classList.add('open'); } else { nav.classList.remove('open'); }
+        if (btn) {
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            btn.textContent = open ? '×' : '☰';
+            btn.title = open ? 'Cerrar menú' : 'Abrir menú';
+        }
+    }
+    // Inicializar estado
+    setState(isDesktop());
+    if (btn) {
+        btn.addEventListener('click', function() {
+            setState(!nav.classList.contains('open'));
+        });
+    }
+    if (links) {
+        links.addEventListener('click', function(e) {
+            if (e.target && e.target.tagName === 'A') {
+                setState(false);
+            }
+        });
+    }
+    // Actualizar estado al cambiar el tamaño de la ventana
+    window.addEventListener('resize', function() {
+        setState(isDesktop());
+    });
+})();
+
+// Resaltado de sección activa en el menú
+(function() {
+    var nav = document.getElementById('floatingMenu');
+    if (!nav) return;
+    var linkNodes = Array.prototype.slice.call(nav.querySelectorAll('.menu-links a'));
+    if (!linkNodes.length) return;
+    var anchors = linkNodes
+        .map(function(a){ var id = (a.getAttribute('href')||'').replace('#',''); return { a: a, id: id, el: document.getElementById(id) }; })
+        .filter(function(x){ return !!x.el; });
+    if (!anchors.length) return;
+    var active = null;
+    function setActive(id) {
+        if (active === id) return;
+        active = id;
+        linkNodes.forEach(function(n){ n.classList.toggle('active', (n.getAttribute('href')||'') === '#' + id); });
+    }
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                setActive(entry.target.id);
+            }
+        });
+    }, { root: null, rootMargin: '0px 0px -60% 0px', threshold: 0.25 });
+    anchors.forEach(function(x){ observer.observe(x.el); });
+})();
+</script>
 </body>
 </html>
