@@ -1,11 +1,560 @@
-html { scroll-behavior: smooth; }
-/* Hero background pattern */
-.hero-bg {
-  background-image: radial-gradient(circle at 20% 20%, rgba(255,255,255,.25) 0 20%, transparent 20% 100%),
-                    radial-gradient(circle at 80% 0%, rgba(255,255,255,.25) 0 18%, transparent 18% 100%),
-                    linear-gradient(135deg, #fde68a, #fbcfe8 60%, #bae6fd);
-  background-size: cover;
+.headliner-name {
+    font-family: 'Anton', sans-serif;
+    font-size: 2.2rem;
+    color: #ffd700;
+    text-shadow: 2px 2px 12px #000, 0 0 8px #ffd700;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 0 0 10px 0;
+    padding: 2px 10px;
+    border-radius: 8px;
+    display: inline-block;
 }
-/* Simple fade-in */
-.fade-in { animation: fade 1s ease-out both; }
-@keyframes fade { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: translateY(0);} }
+/* Historia del festival */
+.festival-history h3 {
+    color: #ff6347;
+    font-family: 'Anton', sans-serif;
+}
+.festival-history p {
+    font-size: 1.08rem;
+    color: #333;
+    margin: 0 0 8px 0;
+    text-align: justify;
+}
+
+/* Parrilla de itinerario tipo festival */
+.festival-schedule h3 {
+    color: #ff6347;
+    font-family: 'Anton', sans-serif;
+    margin-bottom: 12px;
+}
+.festival-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0 auto;
+    max-width: 420px;
+}
+.festival-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: linear-gradient(90deg, #2c2c2c 0%, #1a1a1a 100%);
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #ffd700;
+    font-family: 'Anton', sans-serif;
+    font-size: 1.08rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.festival-time {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-right: 18px;
+    color: #ffcc00;
+    text-shadow: 2px 2px 8px #000;
+    min-width: 70px;
+    text-align: right;
+}
+.festival-act {
+    font-size: 1.08rem;
+    color: #ffd700;
+    text-shadow: 2px 2px 8px #000;
+}
+/* Responsive design */
+@media (max-width: 900px) {
+    .container {
+        max-width: 98vw;
+        padding: 10px;
+    }
+    .headline-cards {
+        flex-direction: column;
+        gap: 18px;
+    }
+    .card.headliner {
+        max-width: 98vw;
+        height: 220px;
+        min-width: 0;
+    }
+    .event-date {
+        font-size: 1.3rem;
+    }
+    .event-location {
+        font-size: 1rem;
+    }
+    .countdown {
+        font-size: 1.1rem;
+        padding: 7px 0 6px 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero {
+        height: auto;
+        padding: 30px 0 10px 0;
+    }
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    .hero-content h2 {
+        font-size: 2.2rem;
+    }
+    .event-date {
+        font-size: 1.1rem;
+    }
+    .event-location {
+        font-size: 0.9rem;
+    }
+    .countdown {
+        font-size: 0.95rem;
+        gap: 8px;
+        padding: 5px 0 4px 0;
+    }
+    .container {
+        padding: 4px;
+    }
+    .section {
+        padding: 10px 0;
+    }
+    .headline-cards {
+        gap: 10px;
+    }
+    .card.headliner {
+        height: 140px;
+    }
+}
+/* Info de fecha y localización en la cabecera */
+.event-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin: 18px 0 10px 0;
+    background: linear-gradient(90deg, #2c2c2c 0%, #1a1a1a 100%);
+    border-radius: 14px;
+    padding: 12px 0 10px 0;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+}
+.event-date {
+    font-family: 'Anton', sans-serif;
+    font-size: 2.1rem;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 2px 2px 10px #000, 0 0 2px #ffd700;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+    background: none;
+    border: none;
+    padding: 0;
+}
+.event-location {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 2px 2px 10px #000, 0 0 2px #ffd700;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+    background: none;
+    border: none;
+    padding: 0;
+}
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    font-size: 1.5rem;
+    font-family: 'Anton', sans-serif;
+    font-weight: bold;
+    color: #ffd700;
+    margin: 18px 0 10px 0;
+    text-shadow: 2px 2px 10px #000, 0 0 2px #ffd700;
+    flex-wrap: wrap;
+    background: linear-gradient(90deg, #2c2c2c 0%, #1a1a1a 100%);
+    border-radius: 14px;
+    padding: 10px 0 8px 0;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+}
+.countdown span {
+    background: none;
+    padding: 0 10px;
+    border-radius: 0;
+}
+/* Estilos para el contador regresivo */
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #ffcc00;
+    margin: 18px 0 10px 0;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    flex-wrap: wrap;
+}
+.countdown span {
+    background: rgba(0,0,0,0.4);
+    padding: 6px 14px;
+    border-radius: 8px;
+}
+/* Cards de cabezas de cartel en el line-up */
+.headline-cards {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.card.headliner {
+    flex: 1 1 250px;
+    min-width: 220px;
+    max-width: 320px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    color: #fff;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+}
+
+.card.headliner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0.2) 100%);
+    z-index: 1;
+}
+
+.card.headliner h4, .card.headliner p {
+    position: relative;
+    z-index: 2;
+    margin: 0 0 10px 0;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+body {
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
+    line-height: 1.6;
+    background-image: url('https://images.unsplash.com/photo-1517457210287-f823058a9e6c');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    text-align: center;
+}
+
+/* Menú flotante superior izquierda */
+.floating-menu {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(26,26,26,0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    padding: 6px 10px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    backdrop-filter: blur(6px);
+}
+.floating-menu .menu-toggle {
+    background: transparent;
+    color: #ffd700;
+    border: none;
+    font-size: 1.1rem;
+    line-height: 1;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    cursor: pointer;
+}
+.floating-menu .menu-toggle:hover {
+    background: rgba(255,215,0,0.12);
+    color: #fff;
+}
+.floating-menu .menu-links {
+    display: none;
+    gap: 8px;
+    flex-direction: column;
+    align-items: stretch;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+.floating-menu.open .menu-links {
+    display: flex;
+}
+.floating-menu a {
+    color: #ffd700;
+    text-decoration: none;
+    font-weight: 700;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9rem;
+    padding: 6px 10px;
+    border-radius: 999px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    display: block;
+}
+.floating-menu a:hover {
+    background: rgba(255,215,0,0.12);
+    color: #fff;
+}
+.floating-menu a.active {
+    background: rgba(255,215,0,0.25);
+    color: #fff;
+}
+
+@media (min-width: 768px) {
+    .floating-menu {
+        border-radius: 999px;
+    }
+    .floating-menu .menu-links {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+/* Scroll suave para anclas */
+html {
+    scroll-behavior: smooth;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    position: relative;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.hero-content {
+    z-index: 2;
+}
+
+h1, h2 {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 0;
+}
+
+h2 {
+    font-size: 4rem;
+    margin-top: 0;
+    color: #ffcc00; /* Color de acento de festival */
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #ffcc00;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #e6b800;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.section {
+    padding: 20px 0;
+    border-bottom: 1px dashed #ccc;
+}
+
+.section:last-child {
+    border-bottom: none;
+}
+
+h3 {
+    font-family: 'Anton', sans-serif;
+    color: #ff6347; /* Color de acento de festival */
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+.line-up .card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 10px;
+    border-left: 5px solid #ff6347;
+}
+
+.line-up h4 {
+    margin: 0;
+    color: #ff6347;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+input[type="text"], input[type="email"] {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+select#attendance-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #fff;
+    color: #333;
+}
+/* Grid de formulario 2 columnas */
+.form-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 16px;
+    max-width: 800px;
+    justify-items: stretch;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+.form-group label {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+/* Campos del formulario a ancho completo dentro de grupos */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+/* Estilos del textarea de mensaje */
+.form-group textarea#rsvp-message {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #fff;
+    color: #333;
+    min-height: 96px;
+    resize: vertical;
+}
+
+@media (max-width: 700px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Placeholder gris hasta que se seleccione una opción válida */
+select#attendance-select:required:invalid {
+    color: #666;
+    border-color: #e53935;
+    box-shadow: 0 0 0 2px rgba(229,57,53,0.12);
+}
+select#attendance-select option[value=""] {
+    color: #666;
+}
+select#attendance-select:valid {
+    color: #333;
+    border-color: #ccc;
+    box-shadow: none;
+}
+
+label {
+    font-weight: bold;
+}
+
+#form-message {
+    margin-top: 10px;
+    font-weight: bold;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.success {
+    color: green;
+}
+
+.error {
+    color: red;
+}
+
+footer {
+    padding: 20px;
+    background-color: rgba(51, 51, 51, 0.8);
+    color: white;
+    margin-top: 20px;
+}
+
+/* ===== Utilidades para la galería (compatibles con las clases usadas) ===== */
+.mt-8 { margin-top: 2rem; }
+.grid { display: grid; }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.gap-4 { gap: 1rem; }
+@media (min-width: 768px) {
+    .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.w-full { width: 100%; }
+.h-40 { height: 10rem; }
+.object-cover { object-fit: cover; }
+.rounded-2xl { border-radius: 1rem; }
+.shadow { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
