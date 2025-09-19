@@ -24,6 +24,10 @@
                 <a href="#info-puntos">Info</a>
             </div>
         </nav>
+        
+        <button class="theme-toggle" ng-click="wedding.toggleTheme()" title="Cambiar tema">
+            <span class="theme-icon">{{ wedding.isDarkMode ? '☀️' : '🌙' }}</span>
+        </button>
         <header class="hero">
             <div class="hero-content">
                 <h1>¡El festival del amor está aquí!</h1>
@@ -37,7 +41,6 @@
                     <span>{{ wedding.countdown.days }} días</span>
                     <span>{{ wedding.countdown.hours }} horas</span>
                     <span>{{ wedding.countdown.minutes }} min</span>
-                    <span>{{ wedding.countdown.seconds }} seg</span>
                 </div>
                 <a href="#info" class="cta-button" ng-click="wedding.scrollToLineUp(); $event.preventDefault();">Ver el Line-Up</a>
             </div>
@@ -98,18 +101,15 @@
                         <span class="festival-act">Banquete - Zona VIP</span>
                     </div>
                     <div class="festival-row">
-                        <span class="festival-time">15:00</span>
-                        <span class="festival-act">DJ Invitado - Chill Out Stage</span>
+                        <span class="festival-time">16:00</span>
+                        <span class="festival-act">Baile de los cabezas de cartel - Main Stage</span>
                     </div>
                     <div class="festival-row">
-                        <span class="festival-time">17:00</span>
-                        <span class="festival-act">Photocall &amp; Juegos - Fun Zone</span>
-                    </div>
-                    <div class="festival-row">
-                        <span class="festival-time">19:00</span>
-                        <span class="festival-act">Fiesta y Baile - Main Stage</span>
+                        <span class="festival-time">16:10</span>
+                        <span class="festival-act">Dj - Main Stage</span>
                     </div>
                 </div>
+                <p>*Los horarios son aproximados y pueden sufrir modificaciones.</p>
             </section>
 
             <section class="section" id="galeria">
@@ -117,7 +117,7 @@
                 <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
                     <img ng-repeat="foto in wedding.galeria" ng-src="{{foto.src}}" alt="Foto {{ $index + 1 }}" class="rounded-2xl w-full h-40 object-cover shadow"/>
                 </div>
-                <a href="https://photos.app.goo.gl/tu-album-aqui" class="cta-button" target="_blank" rel="noopener">Comparte con nosotros las fotos del evento</a>
+                <a ng-href="{{wedding.photoAlbumLink}}" class="cta-button" target="_blank" rel="noopener">Comparte con nosotros las fotos del evento</a>
             </section>
 
             <section class="section" id="rsvp">
@@ -158,8 +158,17 @@
 
             <section class="section" id="info-puntos">
                 <h3>🎁 Puntos de información</h3>
-                <!-- <p><strong>Código de vestimenta:</strong> {{ wedding.dressCode }}</p> -->
-                <p><strong>Regalos:</strong> Tu presencia es nuestro mejor regalo.
+                <div class="faq-container">
+                    <div class="faq-item" ng-repeat="faq in wedding.faqs" ng-class="{'active': faq.isOpen}">
+                        <div class="faq-question" ng-click="wedding.toggleFaq($index)">
+                            <h4>{{ faq.question }}</h4>
+                            <span class="faq-icon">{{ faq.isOpen ? '−' : '+' }}</span>
+                        </div>
+                        <div class="faq-answer" ng-show="faq.isOpen">
+                            <p>{{ faq.answer }}</p>
+                        </div>
+                    </div>
+                </div>
             </section>
 
         </main>

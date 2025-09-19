@@ -43,7 +43,61 @@ app.controller('WeddingController', function($timeout, $interval, $http) {
     vm.partyHowToGo = `https://www.google.com/maps/dir/?api=1&destination=${vm.partyCoords.lat},${vm.partyCoords.lng}`;
     vm.partyPlaceWebsite = 'https://alojamientoeskapa.com/';
     vm.rsvpDeadline = '[Fecha límite]';
-    vm.dressCode = '[Describe el código, por ejemplo: "atuendo de festival chic".]';
+    vm.dressCode = 'Formal con un toque festivo. ¡Siéntete libre de añadir accesorios divertidos y coloridos para celebrar con nosotros!';
+    vm.childrenPolicy = 'Sí, los niños pueden venir con sus padres, su presencia en el evento es importantísima.';
+    vm.transportInfo = 'Lamentablemente no contamos con transporte organizado, por lo que cada asistente deberá gestionar su propio transporte hasta los lugares del evento. Te recomendamos coordinar con otros invitados para compartir vehículos y así facilitar el traslado. ¡Gracias por tu comprensión!';
+    vm.giftsInfo = 'Tu presencia es nuestro mejor regalo.';
+    
+    // Datos del FAQ
+    vm.faqs = [
+        {
+            question: '¿Cuál es el código de vestimenta?',
+            answer: vm.dressCode,
+            isOpen: false
+        },
+        {
+            question: '¿Pueden venir niños al evento?',
+            answer: vm.childrenPolicy,
+            isOpen: false
+        },
+        {
+            question: '¿Cómo puedo llegar al evento?',
+            answer: vm.transportInfo,
+            isOpen: false
+        },
+        {
+            question: '¿Qué puedo regalar a los novios?',
+            answer: vm.giftsInfo,
+            isOpen: false
+        }
+    ];
+    
+    // Función para expandir/contraer FAQ
+    vm.toggleFaq = function(index) {
+        vm.faqs[index].isOpen = !vm.faqs[index].isOpen;
+    };
+    
+    // Funcionalidad del tema oscuro
+    vm.isDarkMode = false;
+    
+    // Cargar preferencia del tema desde localStorage
+    var savedTheme = localStorage.getItem('weddingTheme');
+    if (savedTheme === 'dark') {
+        vm.isDarkMode = true;
+        document.body.classList.add('dark-theme');
+    }
+    
+    vm.toggleTheme = function() {
+        vm.isDarkMode = !vm.isDarkMode;
+        if (vm.isDarkMode) {
+            document.body.classList.add('dark-theme');
+            localStorage.setItem('weddingTheme', 'dark');
+        } else {
+            document.body.classList.remove('dark-theme');
+            localStorage.setItem('weddingTheme', 'light');
+        }
+    };
+    
     vm.galeria = [
         { src: 'assets/images/photo1.jpg' },
         { src: 'assets/images/photo2.jpg' },
@@ -54,6 +108,7 @@ app.controller('WeddingController', function($timeout, $interval, $http) {
         { src: 'assets/images/photo7.jpg' },
         { src: 'assets/images/photo8.jpg' }
       ],
+    vm.photoAlbumLink = 'https://photos.app.goo.gl/xwhofVyYZ4EXPY6C8';
 
     // Objeto para el formulario
     vm.endpoint = "https://corsproxy.io/?url=https://script.google.com/macros/s/AKfycbx5P5NYYJwDUhcwlx3LkIxjP0ToDlfreeAK-kDA_tLoth5Wdv_33dbg5BHdh0nGTThbog/exec";
