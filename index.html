@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Festival del Amor de [Nombre del novio] y [Nombre de la novia]</title>
+    <title>Festival del Amor de Mari Virtu y Ricardo</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
@@ -32,10 +32,11 @@
             <div class="hero-content">
                 <h1>¡El festival del amor está aquí!</h1>
                 <p class="subtitle">Presentando a:</p>
-                <h2>{{ wedding.groomName }} & {{ wedding.brideName }}</h2>
+                <h2>{{ wedding.brideName }} & {{ wedding.groomName }}</h2>
                 <div class="event-info">
                     <span class="event-date">{{ wedding.ceremonyDate }} - {{ wedding.ceremonyTime }}</span>
-                    <span class="event-location">{{ wedding.ceremonyPlace }} - {{wedding.ceremonyAddress}}</span>
+                    <!-- <span class="event-location">{{ wedding.ceremonyPlace }} - {{wedding.ceremonyAddress}}</span> -->
+                    <span class="event-location">{{wedding.ceremonyAddress}}</span>
                 </div>
                 <div class="countdown">
                     <span>{{ wedding.countdown.days }} días</span>
@@ -73,9 +74,11 @@
 
             <section class="section" id="ceremonia">
                 <h3>🗓️ El Escenario Principal: La Ceremonia</h3>
-                <p><strong>Hora:</strong> {{ wedding.ceremonyTime }}</p>
+                <p class="tba-title"><strong>TBA</strong></p>
+                <p class="tba-subtitle">La organización del evento esta ultimando los detalles para establecer el lugar de la ceremonia de iniciación del festival.</p>
+                <!-- <p><strong>Hora:</strong> {{ wedding.ceremonyTime }}</p>
                 <p><strong>Lugar:</strong> {{ wedding.ceremonyPlace }}</p>
-                <button class="cta-button" ng-click="wedding.openLink(wedding.ceremonyHowToGo)">Cómo llegar</button>
+                <button class="cta-button" ng-click="wedding.openLink(wedding.ceremonyHowToGo)">Cómo llegar</button> -->
             </section>
 
             <section class="section" id="banquete">
@@ -94,15 +97,15 @@
                 <div class="festival-grid">
                     <div class="festival-row">
                         <span class="festival-time">12:00</span>
-                        <span class="festival-act">Ceremonia - Escenario Principal</span>
+                        <span class="festival-act">Ceremonia iniciación</span>
                     </div>
                     <div class="festival-row">
-                        <span class="festival-time">13:30</span>
+                        <span class="festival-time">14:00</span>
                         <span class="festival-act">Banquete - Zona VIP</span>
                     </div>
                     <div class="festival-row">
                         <span class="festival-time">16:00</span>
-                        <span class="festival-act">Baile de los cabezas de cartel - Main Stage</span>
+                        <span class="festival-act">Baile - Main Stage</span>
                     </div>
                     <div class="festival-row">
                         <span class="festival-time">16:10</span>

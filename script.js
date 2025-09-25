@@ -33,10 +33,14 @@ app.controller('WeddingController', function($timeout, $interval, $http) {
     vm.story = 'Todo empezó en 2013 en un autobús rumbo a Murcia para acudir al salón del manga. Desde entonces, hemos compartido innumerables aventuras, risas y momentos inolvidables juntos donde de una amistad nació el amor. Ahora, queremos celebrar nuestro amor rodeados de nuestros seres queridos en un evento inolvidable lleno de alegría, ritmo y emociones.';
     vm.ceremonyDate = '16/05/2026';
     vm.ceremonyTime = '12:00 PM';
-    vm.ceremonyPlace = 'El patio de la Tercia';
+    vm.ceremonyPlace = '';
     vm.ceremonyCoords = { lat: 38.630091, lng: -0.8626815 };
-    vm.ceremonyAddress = 'C. Tercia, 12, 03400 Villena, Alicante';
-    vm.ceremonyHowToGo = `https://www.google.com/maps/dir/?api=1&destination=${vm.ceremonyCoords.lat},${vm.ceremonyCoords.lng}`;
+    vm.ceremonyAddress = 'Villena';
+    vm.ceremonyHowToGo = '';
+    // vm.ceremonyPlace = 'El patio de la Tercia';
+    // vm.ceremonyCoords = { lat: 38.630091, lng: -0.8626815 };
+    // vm.ceremonyAddress = 'C. Tercia, 12, 03400 Villena, Alicante';
+    // vm.ceremonyHowToGo = `https://www.google.com/maps/dir/?api=1&destination=${vm.ceremonyCoords.lat},${vm.ceremonyCoords.lng}`;
     vm.partyTime = '2:00 PM';
     vm.partyPlace = 'Eskapa';
     vm.partyCoords = { lat: 38.6550289, lng: -0.8842534 };

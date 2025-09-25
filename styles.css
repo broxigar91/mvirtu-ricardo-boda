@@ -1,3 +1,26 @@
+/* Ceremonia TBA styles */
+.section#ceremonia .tba-title {
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0.5rem 0 0.25rem 0;
+  text-align: center;
+}
+
+.section#ceremonia .tba-subtitle {
+  font-size: 0.75rem;
+  opacity: 0.85;
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .section#ceremonia .tba-title {
+    font-size: 2.5rem;
+  }
+  .section#ceremonia .tba-subtitle {
+    font-size: 1rem;
+  }
+}
 .headliner-name {
     font-family: 'Anton', sans-serif;
     font-size: 2.2rem;
@@ -92,6 +115,7 @@
     .hero {
         height: auto;
         padding: 30px 0 10px 0;
+        background-position: center -40px;
     }
     .hero-content h1 {
         font-size: 2rem;
@@ -121,6 +145,16 @@
     }
     .card.headliner {
         height: 140px;
+    }
+}
+
+/* Overrides específicos de posición de fondo del hero para móviles/tablets pequeñas */
+@media (max-width: 768px) {
+    body .hero {
+        background-position: center -60px;
+    }
+    .dark-theme .hero {
+        background-position: center -60px;
     }
 }
 /* Info de fecha y localización en la cabecera */
