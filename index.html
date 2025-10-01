@@ -2,11 +2,12 @@
 <html lang="es" ng-app="weddingApp">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Festival del Amor de Mari Virtu y Ricardo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-sanitize.js"></script>
     <script src="script.js"></script>
 </head>
 <body>
@@ -168,7 +169,7 @@
                             <span class="faq-icon">{{ faq.isOpen ? '−' : '+' }}</span>
                         </div>
                         <div class="faq-answer" ng-show="faq.isOpen">
-                            <p>{{ faq.answer }}</p>
+                            <p ng-bind-html="faq.answer"></p>
                         </div>
                     </div>
                 </div>

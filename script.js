@@ -1,8 +1,8 @@
 // Define el módulo de la aplicación AngularJS
-var app = angular.module('weddingApp', []);
+var app = angular.module('weddingApp', ['ngSanitize']);
 
 // Define el controlador principal
-app.controller('WeddingController', function($timeout, $interval, $http) {
+app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
     var vm = this;
     // Datos de la boda
     // Fecha objetivo para el contador (formato: YYYY-MM-DDTHH:MM:SS)
@@ -49,10 +49,23 @@ app.controller('WeddingController', function($timeout, $interval, $http) {
     vm.rsvpDeadline = '[Fecha límite]';
     vm.dressCode = 'Formal con un toque festivo. ¡Siéntete libre de añadir accesorios divertidos y coloridos para celebrar con nosotros!';
     vm.childrenPolicy = 'Sí, los niños pueden venir con sus padres, su presencia en el evento es importantísima.';
-    vm.transportInfo = 'Lamentablemente no contamos con transporte organizado, por lo que cada asistente deberá gestionar su propio transporte hasta los lugares del evento. Te recomendamos coordinar con otros invitados para compartir vehículos y así facilitar el traslado. ¡Gracias por tu comprensión!';
-    vm.giftsInfo = 'Tu presencia es nuestro mejor regalo.';
-    
+    vm.transportInfo = 'Lamentablemente, no contamos con transporte organizado, por lo que cada asistente deberá gestionar su propio transporte hasta los lugares del evento. Te recomendamos coordinar con otros invitados para compartir vehículos y así facilitar el traslado. ¡Gracias por tu comprensión!';
+    vm.giftsInfo = 'Ya tenéis vuestras entradas VIP para el festival. ¡No hace falta merchandising extra! Pero si insistís en apoyarnos, sabéis que el staff (los novios) estará disponible para sugerencias.';
+    vm.groomPhone = '691 606 292';
+    vm.bridePhone = '633 780 623';
     // Datos del FAQ
+    function buildContactAnswerHtml() {
+        var parts = [];
+        if (vm.bridePhone) {
+            parts.push(vm.brideName + ' (<strong>' + vm.bridePhone + '</strong>)');
+        }
+        if (vm.groomPhone) {
+            parts.push(vm.groomName + ' (<strong>' + vm.groomPhone + '</strong>)');
+        }
+        var text = 'Sí, puedes llamarnos directamente: ' + parts.join(' y ') + '.';
+        return $sce.trustAsHtml(text);
+    }
+
     vm.faqs = [
         {
             question: '¿Cuál es el código de vestimenta?',
@@ -72,6 +85,11 @@ app.controller('WeddingController', function($timeout, $interval, $http) {
         {
             question: '¿Qué puedo regalar a los novios?',
             answer: vm.giftsInfo,
+            isOpen: false
+        },
+        {
+            question: '¿Puedo contactar con vosotros de alguna forma más directa?',
+            answer: buildContactAnswerHtml(),
             isOpen: false
         }
     ];

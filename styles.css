@@ -111,6 +111,23 @@
     }
 }
 
+/* Ajustes para tablet: centrar cards cuando se distribuyen en 2 filas */
+@media (min-width: 475px) and (max-width: 1024px) {
+    .headline-cards {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+    .card.headliner {
+        flex: 0 1 300px;
+        max-width: 300px;
+        height: 280px;
+        margin: 0;
+    }
+}
+
 @media (max-width: 600px) {
     .hero {
         height: auto;
@@ -954,4 +971,47 @@ footer {
 
 .dark-theme .theme-toggle:hover {
     background: rgba(255, 140, 66, 0.15) !important;
+}
+
+/* Barra de contacto fija inferior */
+.contact-bar {
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+    background: rgba(26,26,26,0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    padding: 8px 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    backdrop-filter: blur(6px);
+}
+.contact-bar .contact-link {
+    color: #ffd700;
+    text-decoration: none;
+    font-weight: 700;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    padding: 8px 12px;
+    border-radius: 999px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.contact-bar .contact-link:hover {
+    background: rgba(255,215,0,0.12);
+    color: #fff;
+}
+
+.dark-theme .contact-bar {
+    background: rgba(20, 20, 20, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+.dark-theme .contact-bar .contact-link {
+    color: #ffd700 !important;
+}
+.dark-theme .contact-bar .contact-link:hover {
+    background: rgba(255, 140, 66, 0.15) !important;
+    color: #fff !important;
 }
