@@ -149,13 +149,13 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
     vm.playlists = [
         {
             title: 'MVYR Playlist',
-            url: 'https://open.spotify.com/playlist/37i9dQZF1DX4WgZiuR77Ef',
+            url: 'https://open.spotify.com/playlist/1LrgdUccSKv6sD6l6Wbkud?si=5f2399d782ba4a0a',
             text: 'Conoce los las canciones favoritas de los novios, no te quedes sin escucharlas!',
             icon: '🎧'
         },
         {
             title: 'Zona VIP After Party',
-            url: 'https://open.spotify.com/playlist/37i9dQZF1DXa2SPUyWl8Y5',
+            url: 'https://open.spotify.com/playlist/4USwojo0yDJA9hj7ZYTYgW?si=3d6de45191d24b0e&pt=0ecec86d429f00c1e8fe0797c53e14e1',
             text: 'Ayudanos a completar la playlist del evento con tus canciones favoritas',
             icon: '⭐'
         }
