@@ -33,24 +33,37 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
     vm.story = 'Todo empezó en 2013 en un autobús rumbo a Murcia para acudir al salón del manga. Desde entonces, hemos compartido innumerables aventuras, risas y momentos inolvidables juntos donde de una amistad nació el amor. Ahora, queremos celebrar nuestro amor rodeados de nuestros seres queridos en un evento inolvidable lleno de alegría, ritmo y emociones.';
     vm.ceremonyDate = '16/05/2026';
     vm.ceremonyTime = '12:00 PM';
-    vm.ceremonyPlace = '';
-    vm.ceremonyCoords = { lat: 38.630091, lng: -0.8626815 };
-    vm.ceremonyAddress = 'Villena';
-    vm.ceremonyHowToGo = '';
+    // Lugar unificado para ceremonia y banquete
+    vm.venue = {
+        name: 'Eskapa',
+        address: 'Villena',
+        coords: { lat: 38.6550289, lng: -0.8842534 },
+        howToGo: '',
+        website: 'https://alojamientoeskapa.com/',
+        parkingInfo: 'En las inmediaciones del recinto, al aire libre'
+    };
+    vm.venue.howToGo = `https://www.google.com/maps/dir/?api=1&destination=${vm.venue.coords.lat},${vm.venue.coords.lng}`;
+
+    // Derivados para compatibilidad con bindings existentes
+    vm.ceremonyPlace = vm.venue.name;
+    vm.ceremonyCoords = vm.venue.coords;
+    vm.ceremonyAddress = vm.venue.address;
+    vm.ceremonyHowToGo = vm.venue.howToGo;
     // vm.ceremonyPlace = 'El patio de la Tercia';
     // vm.ceremonyCoords = { lat: 38.630091, lng: -0.8626815 };
     // vm.ceremonyAddress = 'C. Tercia, 12, 03400 Villena, Alicante';
     // vm.ceremonyHowToGo = `https://www.google.com/maps/dir/?api=1&destination=${vm.ceremonyCoords.lat},${vm.ceremonyCoords.lng}`;
     vm.partyTime = '2:00 PM';
-    vm.partyPlace = 'Eskapa';
-    vm.partyCoords = { lat: 38.6550289, lng: -0.8842534 };
-    vm.partyHowToGo = `https://www.google.com/maps/dir/?api=1&destination=${vm.partyCoords.lat},${vm.partyCoords.lng}`;
-    vm.partyPlaceWebsite = 'https://alojamientoeskapa.com/';
+    vm.partyPlace = vm.venue.name;
+    vm.partyCoords = vm.venue.coords;
+    vm.partyHowToGo = vm.venue.howToGo;
+    vm.partyPlaceWebsite = vm.venue.website;
     vm.rsvpDeadline = '[Fecha límite]';
     vm.dressCode = 'Formal con un toque festivo. ¡Siéntete libre de añadir accesorios divertidos y coloridos para celebrar con nosotros!';
     vm.childrenPolicy = 'Sí, los niños pueden venir con sus padres, su presencia en el evento es importantísima.';
     vm.transportInfo = 'Lamentablemente, no contamos con transporte organizado, por lo que cada asistente deberá gestionar su propio transporte hasta los lugares del evento. Te recomendamos coordinar con otros invitados para compartir vehículos y así facilitar el traslado. ¡Gracias por tu comprensión!';
     vm.giftsInfo = 'Ya tenéis vuestras entradas VIP para el festival. ¡No hace falta merchandising extra! Pero si insistís en apoyarnos, sabéis que el staff (los novios) estará disponible para sugerencias.';
+    vm.companionPolicy = 'Aunque nos encantaría tener a todos juntos, las invitaciones están limitadas a aquellas personas que la hayan recibido. ¡Gracias por tu comprensión!';
     vm.groomPhone = '691 606 292';
     vm.bridePhone = '633 780 623';
     // Datos del FAQ
@@ -62,7 +75,7 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
         if (vm.groomPhone) {
             parts.push(vm.groomName + ' (<strong>' + vm.groomPhone + '</strong>)');
         }
-        var text = 'Sí, puedes llamarnos directamente: ' + parts.join(' y ') + '.';
+        var text = 'Sí, puedes llamarnos directamente: ' + parts.join(' y ') + '. O escribiendonos a <a href="mailto:mvyr160526@gmail.com">mvyr160526@gmail.com</a>.';
         return $sce.trustAsHtml(text);
     }
 
@@ -73,6 +86,11 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
             isOpen: false
         },
         {
+            question: '¿Puedo llevar acompañante?',
+            answer: vm.companionPolicy,
+            isOpen: false
+        },
+        {
             question: '¿Pueden venir niños al evento?',
             answer: vm.childrenPolicy,
             isOpen: false
@@ -80,11 +98,6 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
         {
             question: '¿Cómo puedo llegar al evento?',
             answer: vm.transportInfo,
-            isOpen: false
-        },
-        {
-            question: '¿Qué puedo regalar a los novios?',
-            answer: vm.giftsInfo,
             isOpen: false
         },
         {
@@ -131,6 +144,22 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
         { src: 'assets/images/photo8.jpg' }
       ],
     vm.photoAlbumLink = 'https://photos.app.goo.gl/xwhofVyYZ4EXPY6C8';
+
+    // Playlists de Spotify (configurables)
+    vm.playlists = [
+        {
+            title: 'MVYR Playlist',
+            url: 'https://open.spotify.com/playlist/37i9dQZF1DX4WgZiuR77Ef',
+            text: 'Conoce los las canciones favoritas de los novios, no te quedes sin escucharlas!',
+            icon: '🎧'
+        },
+        {
+            title: 'Zona VIP After Party',
+            url: 'https://open.spotify.com/playlist/37i9dQZF1DXa2SPUyWl8Y5',
+            text: 'Ayudanos a completar la playlist del evento con tus canciones favoritas',
+            icon: '⭐'
+        }
+    ];
 
     // Objeto para el formulario
     vm.endpoint = "https://corsproxy.io/?url=https://script.google.com/macros/s/AKfycbx5P5NYYJwDUhcwlx3LkIxjP0ToDlfreeAK-kDA_tLoth5Wdv_33dbg5BHdh0nGTThbog/exec";

@@ -538,6 +538,64 @@ h3 {
     color: #ff6347;
 }
 
+/* Grid para sección de playlists: 2 columnas por defecto, 1 en móvil */
+.playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+@media (max-width: 700px) {
+    .playlist-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Insignias de escenario para resaltar sub-bloques */
+.stage-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Anton', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.stage-badge .icon {
+    font-size: 1rem;
+}
+.stage-badge.main-stage {
+    background: linear-gradient(90deg, #2c2c2c 0%, #1a1a1a 100%);
+    color: #ffd700;
+    border: 1px solid rgba(255,215,0,0.25);
+}
+.stage-badge.vip {
+    background: linear-gradient(90deg, #3b1f00 0%, #2a1500 100%);
+    color: #ffcc99;
+    border: 1px solid rgba(255,140,66,0.35);
+}
+.stage-badge.full {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-radius: 12px;
+    margin: -6px 0 10px 0;
+}
+.line-up .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.stage-card-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
 form {
     display: flex;
     flex-direction: column;

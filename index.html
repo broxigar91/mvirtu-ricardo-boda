@@ -17,9 +17,9 @@
             <button class="menu-toggle" aria-expanded="false" aria-controls="menuLinks" title="Abrir menú">☰</button>
             <div class="menu-links" id="menuLinks">
                 <a href="#lineup">Line-up</a>
-                <a href="#ceremonia">Ceremonia</a>
-                <a href="#banquete">Banquete</a>
+                <a href="#ceremonia-banquete">Ceremonia y Banquete</a>
                 <a href="#itinerario">Itinerario</a>
+                <a href="#playlist">Playlist</a>
                 <a href="#galeria">Galería</a>
                 <a href="#rsvp">Asistencia</a>
                 <a href="#info-puntos">Info</a>
@@ -31,13 +31,13 @@
         </button>
         <header class="hero">
             <div class="hero-content">
-                <h1>¡El festival del amor está aquí!</h1>
-                <p class="subtitle">Presentando a:</p>
-                <h2>{{ wedding.brideName }} & {{ wedding.groomName }}</h2>
+                <!-- <h1>¡El festival del amor está aquí!</h1> -->
+                <!-- <p class="subtitle">Presentando a:</p> -->
+                <h1>{{ wedding.brideName }} & {{ wedding.groomName }}</h1>
+                <h2>WEDDING TOUR</h2>
                 <div class="event-info">
                     <span class="event-date">{{ wedding.ceremonyDate }} - {{ wedding.ceremonyTime }}</span>
-                    <!-- <span class="event-location">{{ wedding.ceremonyPlace }} - {{wedding.ceremonyAddress}}</span> -->
-                    <span class="event-location">{{wedding.ceremonyAddress}}</span>
+                    <span class="event-location">{{ wedding.venue.name }} - {{ wedding.venue.address }}</span>
                 </div>
                 <div class="countdown">
                     <span>{{ wedding.countdown.days }} días</span>
@@ -73,23 +73,24 @@
                 </p>
             </section>
 
-            <section class="section" id="ceremonia">
-                <h3>🗓️ El Escenario Principal: La Ceremonia</h3>
-                <p class="tba-title"><strong>TBA</strong></p>
-                <p class="tba-subtitle">La organización del evento esta ultimando los detalles para establecer el lugar de la ceremonia de iniciación del festival.</p>
-                <!-- <p><strong>Hora:</strong> {{ wedding.ceremonyTime }}</p>
-                <p><strong>Lugar:</strong> {{ wedding.ceremonyPlace }}</p>
-                <button class="cta-button" ng-click="wedding.openLink(wedding.ceremonyHowToGo)">Cómo llegar</button> -->
-            </section>
-
-            <section class="section" id="banquete">
-                <h3>🎉 La Zona VIP: El Banquete</h3>
-                <p><strong>Hora de inicio:</strong> {{ wedding.partyTime }}</p>
-                <p><strong>Lugar:</strong> {{ wedding.partyPlace }}</p>
-                <p><strong>Aparcamiento:</strong> En las inmediaciones del recinto, al aire libre</p>
-                <button class="cta-button" ng-click="wedding.openLink(wedding.partyHowToGo)">Cómo llegar</button>
-                <button class="cta-button" ng-click="wedding.openLink(wedding.partyPlaceWebsite)">Web del lugar</button>
-                
+            <section class="section" id="ceremonia-banquete">
+                <h3>🗓️ Ceremonia y Banquete</h3>
+                <div class="line-up">
+                    <div class="card">
+                        <span class="stage-badge main-stage full"><span class="icon">🎤</span>Main Stage</span>
+                        <h4>Ceremonia</h4>
+                        <p><strong>Hora:</strong> {{ wedding.ceremonyTime }}</p>
+                    </div>
+                    <div class="card">
+                        <span class="stage-badge vip full"><span class="icon">⭐</span>Zona VIP</span>
+                        <h4>Banquete</h4>
+                        <p><strong>Hora de inicio:</strong> {{ wedding.partyTime }}</p>
+                    </div>
+                </div>
+                <p><strong>Lugar:</strong> {{ wedding.venue.name }} - {{ wedding.venue.address }}</p>
+                <p><strong>Aparcamiento:</strong> {{ wedding.venue.parkingInfo }}</p>
+                <button class="cta-button" ng-click="wedding.openLink(wedding.venue.howToGo)">Cómo llegar</button>
+                <button class="cta-button" ng-click="wedding.openLink(wedding.venue.website)">Web del lugar</button>
             </section>
 
             <!-- Sección itinerario tipo parrilla de festival -->
@@ -105,15 +106,27 @@
                         <span class="festival-act">Banquete - Zona VIP</span>
                     </div>
                     <div class="festival-row">
-                        <span class="festival-time">16:00</span>
+                        <span class="festival-time">17:00</span>
                         <span class="festival-act">Baile - Main Stage</span>
                     </div>
                     <div class="festival-row">
-                        <span class="festival-time">16:10</span>
+                        <span class="festival-time">17:10</span>
                         <span class="festival-act">Dj - Main Stage</span>
                     </div>
                 </div>
                 <p>*Los horarios son aproximados y pueden sufrir modificaciones.</p>
+            </section>
+
+            <!-- Sección Playlist -->
+            <section class="section" id="playlist">
+                <h3>🎶 Playlist del Festival</h3>
+                <div class="playlist-grid">
+                    <div class="card" ng-repeat="pl in wedding.playlists">
+                        <h4>{{ pl.title }}</h4>
+                        <p ng-if="pl.text">{{ pl.text }}</p>
+                        <a class="cta-button" ng-href="{{ pl.url }}" target="_blank" rel="noopener">{{ pl.icon }} Escuchar en Spotify</a>
+                    </div>
+                </div>
             </section>
 
             <section class="section" id="galeria">
