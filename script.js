@@ -150,7 +150,7 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
         {
             title: 'MVYR Playlist',
             url: 'https://open.spotify.com/playlist/1LrgdUccSKv6sD6l6Wbkud?si=5f2399d782ba4a0a',
-            text: 'Conoce los las canciones favoritas de los novios, no te quedes sin escucharlas!',
+            text: 'Conoce las canciones favoritas de los novios, no te quedes sin escucharlas!',
             icon: '🎧'
         },
         {
