@@ -172,14 +172,33 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
 
     // Función para manejar el envío del formulario
     vm.submitRSVP = function() {
+      // Guardar los datos del formulario antes de enviar para tracking consistente
+      var formData = {
+        attendance: vm.rsvp.asistencia,
+        has_name: !!vm.rsvp.nombre,
+        has_email: !!vm.rsvp.email,
+        has_allergies: !!vm.rsvp.alergias,
+        has_message: !!vm.rsvp.mensaje
+      };
+      
+      // Track form submission attempt
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'form_submission_attempt', formData);
+      }
+      
       vm.enviando = true;
       vm.message = '';
       vm.messageClass = '';
       $http.post(vm.endpoint, vm.rsvp)
         .then(function(response) {
+          // Track successful form submission
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'form_submission_success', formData);
+          }
+          
           vm.enviado = true;
           vm.enviando = false;
-          vm.rsvp = {};
+          vm.rsvp = {}; // Solo vaciar después del éxito
           vm.message = '¡Gracias! Hemos recibido tu confirmación.';
           vm.messageClass = 'success';
           $timeout(function() {
@@ -188,14 +207,32 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
             vm.messageClass = '';
           }, 5000);
         }, function(error) {
+          // Track form submission error
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'form_submission_error', {
+              'attendance': formData.attendance,
+              'has_allergies': formData.has_allergies,
+              'has_message': formData.has_message,
+              'error_code': error.status || 'unknown'
+            });
+          }
+          
           vm.enviando = false;
           vm.message = 'Hubo un problema al enviar tu confirmación. Intenta de nuevo.';
           vm.messageClass = 'error';
+          // NO vaciar vm.rsvp aquí - mantener los datos para reintento
         });
     };
 
     // Scroll suave al line-up
     vm.scrollToLineUp = function() {
+        // Track section view
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'section_view', {
+                'section_name': 'lineup'
+            });
+        }
+        
         var el = document.getElementById('info');
         if (el) {
             el.scrollIntoView({ behavior: 'smooth' });
