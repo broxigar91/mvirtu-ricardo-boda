@@ -58,7 +58,7 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
     vm.partyCoords = vm.venue.coords;
     vm.partyHowToGo = vm.venue.howToGo;
     vm.partyPlaceWebsite = vm.venue.website;
-    vm.rsvpDeadline = '[Fecha límite]';
+    vm.rsvpDeadline = '1/04/2026';
     vm.dressCode = 'Formal con un toque festivo. ¡Siéntete libre de añadir accesorios divertidos y coloridos para celebrar con nosotros!';
     vm.childrenPolicy = 'Sí, los niños pueden venir con sus padres, su presencia en el evento es importantísima.';
     vm.transportInfo = 'Lamentablemente, no contamos con transporte organizado, por lo que cada asistente deberá gestionar su propio transporte hasta los lugares del evento. Te recomendamos coordinar con otros invitados para compartir vehículos y así facilitar el traslado. ¡Gracias por tu comprensión!';
@@ -178,7 +178,8 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
         has_name: !!vm.rsvp.nombre,
         has_email: !!vm.rsvp.email,
         has_allergies: !!vm.rsvp.alergias,
-        has_message: !!vm.rsvp.mensaje
+        has_message: !!vm.rsvp.mensaje,
+        menu: vm.rsvp.menu
       };
       
       // Track form submission attempt
@@ -213,7 +214,8 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
               'attendance': formData.attendance,
               'has_allergies': formData.has_allergies,
               'has_message': formData.has_message,
-              'error_code': error.status || 'unknown'
+              'error_code': error.status || 'unknown',
+              'menu': formData.menu
             });
           }
           

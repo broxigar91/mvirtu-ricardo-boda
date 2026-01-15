@@ -610,7 +610,7 @@ input[type="text"], input[type="email"] {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-select#attendance-select {
+select#attendance-select,#attendance-menu {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -678,15 +678,15 @@ select#attendance-select {
     }
 }
 /* Placeholder gris hasta que se seleccione una opción válida */
-select#attendance-select:required:invalid {
+select#attendance-select:required:invalid, #attendance-menu:required:invalid {
     color: #666;
     border-color: #e53935;
     box-shadow: 0 0 0 2px rgba(229,57,53,0.12);
 }
-select#attendance-select option[value=""] {
+select#attendance-select option[value=""], #attendance-menu option[value=""] {
     color: #666;
 }
-select#attendance-select:valid {
+select#attendance-select:valid, #attendance-menu:valid {
     color: #333;
     border-color: #ccc;
     box-shadow: none;
