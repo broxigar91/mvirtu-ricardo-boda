@@ -162,7 +162,8 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
     ];
 
     // Objeto para el formulario
-    vm.endpoint = "https://corsproxy.io/?url=https://script.google.com/macros/s/AKfycbx5P5NYYJwDUhcwlx3LkIxjP0ToDlfreeAK-kDA_tLoth5Wdv_33dbg5BHdh0nGTThbog/exec";
+    // Llamamos directamente al script de Google sin usar un proxy público
+    vm.endpoint = "https://script.google.com/macros/s/AKfycbx5P5NYYJwDUhcwlx3LkIxjP0ToDlfreeAK-kDA_tLoth5Wdv_33dbg5BHdh0nGTThbog/exec";
 
     vm.rsvp = {};
     vm.enviado = false;
@@ -190,40 +191,56 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
       vm.enviando = true;
       vm.message = '';
       vm.messageClass = '';
-      $http.post(vm.endpoint, vm.rsvp)
-        .then(function(response) {
-          // Track successful form submission
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'form_submission_success', formData);
-          }
-          
+
+      // Usamos fetch en modo "no-cors" para evitar problemas CORS de navegadores
+      // En este modo no podemos leer la respuesta, así que asumimos éxito si no hay error de red.
+      fetch(vm.endpoint, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify(vm.rsvp)
+      })
+      .then(function() {
+        // Track successful form submission (éxito optimista)
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'form_submission_success', formData);
+        }
+
+        $timeout(function() {
           vm.enviado = true;
           vm.enviando = false;
-          vm.rsvp = {}; // Solo vaciar después del éxito
+          vm.rsvp = {}; // Solo vaciar después del "éxito"
           vm.message = '¡Gracias! Hemos recibido tu confirmación.';
           vm.messageClass = 'success';
+
           $timeout(function() {
             vm.enviado = false;
             vm.message = '';
             vm.messageClass = '';
           }, 5000);
-        }, function(error) {
-          // Track form submission error
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'form_submission_error', {
-              'attendance': formData.attendance,
-              'has_allergies': formData.has_allergies,
-              'has_message': formData.has_message,
-              'error_code': error.status || 'unknown',
-              'menu': formData.menu
-            });
-          }
-          
+        });
+      })
+      .catch(function(error) {
+        // Track form submission error
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'form_submission_error', {
+            'attendance': formData.attendance,
+            'has_allergies': formData.has_allergies,
+            'has_message': formData.has_message,
+            'error_code': (error && error.message) || 'network_error',
+            'menu': formData.menu
+          });
+        }
+
+        $timeout(function() {
           vm.enviando = false;
           vm.message = 'Hubo un problema al enviar tu confirmación. Intenta de nuevo.';
           vm.messageClass = 'error';
           // NO vaciar vm.rsvp aquí - mantener los datos para reintento
         });
+      });
     };
 
     // Scroll suave al line-up
