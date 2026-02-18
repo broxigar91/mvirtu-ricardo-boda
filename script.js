@@ -59,7 +59,7 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
     vm.partyHowToGo = vm.venue.howToGo;
     vm.partyPlaceWebsite = vm.venue.website;
     vm.rsvpDeadline = '1/04/2026';
-    vm.dressCode = 'Elegante, con no ir de blanco es suficiente xD. El negro es bien recibido 🤘. Recordad que hay zona de césped (para que tengáis en cuenta si lleváis tacones). Recomendado que os traigáis un cambio de calzado para la fiesta por que se va a liar';
+    vm.dressCode = 'Elegante, con no ir de blanco es suficiente xD. El negro es bien recibido 🤘. Recordad que hay zona de césped (para que tengáis en cuenta si lleváis tacones). Recomendado que os traigáis un cambio de calzado para la fiesta por que ¡se va a liar!';
     vm.childrenPolicy = 'Sí, los niños pueden venir con sus padres, su presencia en el evento es importantísima.';
     vm.transportInfo = 'Lamentablemente, no contamos con transporte organizado, por lo que cada asistente deberá gestionar su propio transporte hasta los lugares del evento. Te recomendamos coordinar con otros invitados para compartir vehículos y así facilitar el traslado. ¡Gracias por tu comprensión!';
     vm.giftsInfo = 'Ya tenéis vuestras entradas VIP para el festival. ¡No hace falta merchandising extra! Pero si insistís en apoyarnos, sabéis que el staff (los novios) estará disponible para sugerencias.';
