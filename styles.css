@@ -525,6 +525,23 @@ h3 {
     margin-top: 0;
 }
 
+/* Mapa del evento responsive */
+.event-map {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    margin: 0 auto;
+}
+
+.event-map img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
 .line-up .card {
     background-color: #f9f9f9;
     padding: 20px;
