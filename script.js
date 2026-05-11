@@ -33,6 +33,7 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
     vm.story = 'Todo empezó en 2013 en un autobús rumbo a Murcia para acudir al salón del manga. Desde entonces, hemos compartido innumerables aventuras, risas y momentos inolvidables juntos donde de una amistad nació el amor. Ahora, queremos celebrar nuestro amor rodeados de nuestros seres queridos en un evento inolvidable lleno de alegría, ritmo y emociones.';
     vm.ceremonyDate = '16/05/2026';
     vm.ceremonyTime = '12:30 PM';
+    vm.eventTime = '12:00 PM';
     // Lugar unificado para ceremonia y banquete
     vm.venue = {
         name: 'Eskapa',
