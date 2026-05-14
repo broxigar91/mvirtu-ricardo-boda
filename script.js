@@ -38,12 +38,12 @@ app.controller('WeddingController', function($timeout, $interval, $http, $sce) {
     vm.venue = {
         name: 'Eskapa',
         address: 'Villena',
-        coords: { lat: 38.6550289, lng: -0.8842534 },
+        coords: { lat: 38.6545178, lng: -0.8822741 },
         howToGo: '',
         website: 'https://alojamientoeskapa.com/',
         parkingInfo: 'En las inmediaciones del recinto, al aire libre'
     };
-    vm.venue.howToGo = `https://www.google.com/maps/dir/?api=1&destination=${vm.venue.coords.lat},${vm.venue.coords.lng}`;
+    vm.venue.howToGo = `https://maps.app.goo.gl/atg1Y2H9WWneYHWX6`;
 
     // Derivados para compatibilidad con bindings existentes
     vm.ceremonyPlace = vm.venue.name;
